@@ -1,28 +1,33 @@
 {
   "name": "@repo/ui",
   "version": "0.0.0",
-  "private": true,
+  "sideEffects": [
+    "**/*.css"
+  ],
   "exports": {
-    "./button": "./src/button.tsx",
-    "./card": "./src/card.tsx",
-    "./code": "./src/code.tsx"
+    "./styles.css": "./dist/index.css",
+    "./card": "./src/card.tsx"
   },
+  "license": "MIT",
   "scripts": {
-    "lint": "eslint . --max-warnings 0",
-    "generate:component": "turbo gen react-component"
+    "build": "tailwindcss -i ./src/styles.css -o dist/index.css",
+    "lint": "eslint src/",
+    "dev": "tailwindcss -i ./src/styles.css -o ./dist/index.css --watch",
+    "type-check": "tsc --noEmit"
+  },
+  "peerDependencies": {
+    "react": "^18.2.0"
   },
   "devDependencies": {
     "@repo/eslint-config": "workspace:*",
-    "@repo/tailwind-config": "workspace:^",
+    "@repo/tailwind-config": "workspace:*",
     "@repo/typescript-config": "workspace:*",
-    "@turbo/gen": "^1.11.3",
-    "@types/eslint": "^8.56.1",
-    "@types/node": "^20.10.6",
     "@types/react": "^18.2.46",
-    "@types/react-dom": "^18.2.18",
-    "eslint": "^8.56.0",
+    "autoprefixer": "^10.4.16",
+    "postcss": "^8.4.33",
     "react": "^18.2.0",
     "tailwindcss": "^3.4.0",
+    "tsup": "^8.0.1",
     "typescript": "^5.3.3"
   }
 }

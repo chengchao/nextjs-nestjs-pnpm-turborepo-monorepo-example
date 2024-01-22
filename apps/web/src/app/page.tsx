@@ -1,8 +1,5 @@
 import Image from "next/image";
 import { Card } from "@repo/ui/card";
-import { Code } from "@repo/ui/code";
-import styles from "./page.module.css";
-import { Button } from "@repo/ui/button";
 
 function Gradient({
   conic,
@@ -15,14 +12,8 @@ function Gradient({
 }): JSX.Element {
   return (
     <span
-      className={[
-        styles.gradient,
-        conic ? styles.glowConic : undefined,
-        small ? styles.gradientSmall : styles.gradientLarge,
-        className,
-      ]
-        .filter(Boolean)
-        .join(" ")}
+      className={`absolute mix-blend-normal will-change-[filter] rounded-[100%] ${small ? "blur-[32px]" : "blur-[75px]"
+        } ${conic ? "bg-glow-conic" : ""} ${className}`}
     />
   );
 }
@@ -53,14 +44,15 @@ const LINKS = [
 
 export default function Page(): JSX.Element {
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          examples/basic&nbsp;
-          <Code className={styles.code}>web</Code>
+    <main className="flex flex-col items-center justify-between min-h-screen p-24">
+      <div className="z-10 items-center justify-between w-full max-w-5xl font-mono text-sm lg:flex">
+        <p className="fixed top-0 left-0 flex justify-center w-full px-4 pt-8 pb-6 border-b bg-gradient-to-b backdrop-blur-2xl border-neutral-800 bg-zinc-800/30 from-inherit lg:static lg:w-auto lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:bg-zinc-800/30">
+          examples/with-tailwind -&nbsp;
+          <code className="font-mono font-bold">web</code>
         </p>
-        <div>
+        <div className="fixed bottom-0 left-0 flex items-end justify-center w-full h-48 bg-gradient-to-t from-black via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
           <a
+            className="flex gap-2 p-8 pointer-events-none place-items-center lg:pointer-events-auto lg:p-0"
             href="https://vercel.com?utm_source=create-turbo&utm_medium=basic&utm_campaign=create-turbo"
             rel="noopener noreferrer"
             target="_blank"
@@ -68,7 +60,7 @@ export default function Page(): JSX.Element {
             By{" "}
             <Image
               alt="Vercel Logo"
-              className={styles.vercelLogo}
+              className="invert"
               height={24}
               priority
               src="/vercel.svg"
@@ -78,41 +70,42 @@ export default function Page(): JSX.Element {
         </div>
       </div>
 
-      <Button appName="web" className={styles.button}>
-        Click me!
-      </Button>
-
-      <div className={styles.hero}>
-        <div className={styles.heroContent}>
-          <div className={styles.logos}>
-            <div className={styles.circles}>
+      <div className="relative flex place-items-center ">
+        <div className="font-sans w-auto pb-16 pt-[48px] md:pb-24 lg:pb-32 md:pt-16 lg:pt-20 flex justify-between gap-8 items-center flex-col relative z-0">
+          <div className="z-50 flex items-center justify-center w-full">
+            <div className="absolute min-w-[614px] min-h-[614px]">
               <Image
-                alt=""
+                alt="Turborepo"
                 height={614}
                 src="circles.svg"
                 width={614}
-                style={{ pointerEvents: "none" }}
               />
             </div>
-            <div className={styles.logoGradientContainer}>
-              <Gradient className={styles.logoGradient} conic small />
+            <div className="absolute z-50 flex items-center justify-center w-64 h-64">
+              <Gradient
+                className="opacity-90 w-[120px] h-[120px]"
+                conic
+                small
+              />
             </div>
 
-            <div className={styles.logo}>
+            <div className="w-[120px] h-[120px] z-50">
               <Image
-                alt="Turborepo"
+                alt=""
                 height={120}
                 priority
                 src="turborepo.svg"
                 width={120}
-                style={{ pointerEvents: "none" }}
               />
             </div>
           </div>
-          <Gradient className={styles.backgroundGradient} conic />
-          <div className={styles.turborepoWordmarkContainer}>
+          <Gradient
+            className="top-[-500px] opacity-[0.15] w-[1000px] h-[1000px]"
+            conic
+          />
+          <div className="z-50 flex flex-col items-center justify-center gap-5 px-6 text-center lg:gap-6">
             <svg
-              className={styles.turborepoWordmark}
+              className="w-[160px] md:w-[200px] fill-white"
               viewBox="0 0 506 50"
               width={200}
               xmlns="http://www.w3.org/2000/svg"
@@ -132,9 +125,9 @@ export default function Page(): JSX.Element {
         </div>
       </div>
 
-      <div className={styles.grid}>
+      <div className="grid mb-32 text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
         {LINKS.map(({ title, href, description }) => (
-          <Card className={styles.card} href={href} key={title} title={title}>
+          <Card href={href} key={title} title={title}>
             {description}
           </Card>
         ))}
