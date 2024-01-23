@@ -1,5 +1,8 @@
 module.exports = {
-  extends: ["@commitlint/config-conventional"],
+  extends: [
+    "@commitlint/config-conventional",
+    "@commitlint/config-pnpm-scopes",
+  ],
   rules: {
     "body-leading-blank": [1, "always"],
     "body-max-line-length": [2, "always", 100],

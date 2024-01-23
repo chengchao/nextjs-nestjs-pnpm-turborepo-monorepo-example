@@ -16,6 +16,7 @@
   "devDependencies": {
     "@commitlint/cli": "^18.5.0",
     "@commitlint/config-conventional": "^18.5.0",
+    "@commitlint/config-pnpm-scopes": "^18.4.4",
     "@repo/eslint-config": "workspace:*",
     "@repo/typescript-config": "workspace:*",
     "husky": "^8.0.3",
